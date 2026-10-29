@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      // Replace with Firebase custom claims for production. Email allowlists are
+      // not available securely from environment variables in Firestore rules.
+      return signedIn() && request.auth.token.email in ['you@example.com'];
+    }
+    match /stories/{storyId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    match /users/{userId}/favorites/{favoriteId} {
+      allow read, write, delete: if signedIn() && request.auth.uid == userId;
+    }
+    match /subscriptions/{userId} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow write: if false; // server/admin only; never let clients grant themselves Premium
+    }
+  }
+}

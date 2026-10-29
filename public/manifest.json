@@ -1,0 +1,14 @@
+{
+  "name": "LISTEN - Horror Stories",
+  "short_name": "LISTEN",
+  "description": "Stories That Don't Let You Sleep",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#d20f2f",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
