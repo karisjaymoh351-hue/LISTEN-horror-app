@@ -18,4 +18,5 @@ export async function getStories(): Promise<Story[]> {
     const snap = await getDocs(query(collection(db, "stories"), orderBy("createdAt", "desc")));
     if (snap.empty) return demoStories;
     return snap.docs.map(d => ({ id: d.id, ...d.data() } as Story));
-  } catch { return demoStories;} 
+  } catch { return demoStories; } 
+}
